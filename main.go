@@ -20,6 +20,12 @@ func main() {
 
 	packages := strings.Split(removeCarriageReturn(string(output)), "\n")
 	for _, pkg := range packages {
+		pkg = removeLineFeed(pkg)
+
+		if pkg == "" {
+			continue
+		}
+
 		pkgName := strings.ReplaceAll(pkg, "package:", "")
 		log.Printf("pulling %s\n", pkgName)
 		extractPackage(pkgName)
